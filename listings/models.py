@@ -6,6 +6,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
 class Listing(models.Model):
+    """Model representing a tutoring listing or event."""
     title = models.CharField(max_length=100, unique=False)
     slug = models.SlugField(max_length=200, unique=True)
     tutor = models.ForeignKey(
