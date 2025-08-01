@@ -8,6 +8,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class Listing(models.Model):
     """Model representing a tutoring listing or event."""
     title = models.CharField(max_length=100, unique=False)
+    short_description = models.TextField(blank=True)
     slug = models.SlugField(max_length=200, unique=True)
     tutor = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="listings"
@@ -16,4 +17,7 @@ class Listing(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     event_date_start = models.DateTimeField(null=True, blank=True)
     event_date_end = models.DateTimeField(null=True, blank=True)
+    event_spaces = models.IntegerField(default=1)
+    event_spaces_available = models.IntegerField(default=1)
     status = models.IntegerField(choices=STATUS, default=0)
+
