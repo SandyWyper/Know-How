@@ -15,6 +15,7 @@ class Listing(models.Model):
     )
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
     event_date_start = models.DateTimeField(null=True, blank=True)
     event_date_end = models.DateTimeField(null=True, blank=True)
     event_spaces = models.IntegerField(default=1)
