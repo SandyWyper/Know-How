@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listings Part 1</title>
+  </head>
+
+  <body>
+    <h1>Listings list</h1>
+    {% for listing in object_list %}
+    <h2>{{listing.title}}</h2>
+    <p>{{listing.short_description}}</p>
+    <p>Tutor: {{listing.tutor}}</p>
+    {% endfor %}
+  </body>
+</html>
