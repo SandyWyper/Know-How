@@ -22,6 +22,10 @@ class Listing(models.Model):
     # event_spaces_available = models.IntegerField(default=1)
     status = models.IntegerField(choices=STATUS, default=0)
 
+    def __str__(self):
+        return f"{self.title} --- by {self.tutor.username}"
+
+
 
 class TimeSlot(models.Model):
     """Model representing a time slot for a listing."""
