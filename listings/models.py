@@ -16,9 +16,25 @@ class Listing(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    event_date_start = models.DateTimeField(null=True, blank=True)
-    event_date_end = models.DateTimeField(null=True, blank=True)
+    # event_date_start = models.DateTimeField(null=True, blank=True)
+    # event_date_end = models.DateTimeField(null=True, blank=True)
+    # event_spaces = models.IntegerField(default=1)
+    # event_spaces_available = models.IntegerField(default=1)
+    status = models.IntegerField(choices=STATUS, default=0)
+
+
+class TimeSlot(models.Model):
+    """Model representing a time slot for a listing."""
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="time_slots")
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     event_spaces = models.IntegerField(default=1)
     event_spaces_available = models.IntegerField(default=1)
+    is_available = models.BooleanField(default=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.listing.title} - {self.start_time.strftime('%Y-%m-%d %H:%M')}"
 
