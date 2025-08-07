@@ -4,6 +4,6 @@ from .models import Listing
 
 # Create your views here.
 class ListingList(generic.ListView):
-    model = Listing
+    queryset = Listing.objects.filter(status=1)
     template_name = "listings/listings.html"
     # context_object_name = "object_list"
