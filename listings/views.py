@@ -4,6 +4,7 @@ from .models import Listing
 
 # Create your views here.
 class ListingList(generic.ListView):
-    queryset = Listing.objects.filter(status=1)
-    template_name = "listings/listings.html"
+    queryset = Listing.objects.filter(status=1).order_by("-created_on")
+    template_name = "listings/index.html"
+    paginate_by = 6
     # context_object_name = "object_list"
