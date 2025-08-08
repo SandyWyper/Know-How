@@ -1,20 +1,20 @@
 {% extends "base.html" %} {% block content %}
 
 <!-- index.html content starts here -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
   <!-- Page Header -->
-  <div class="hero bg-base-200 rounded-lg mb-8">
+  <div class="hero bg-base-200 mb-8">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <h1 class="text-4xl font-bold text-base-content">Know-How Listings</h1>
-        <p class="py-6 text-base-content/70">
+        <h1 class="text-base-content text-4xl font-bold">Know-How Listings</h1>
+        <p class="text-base-content/70 py-6">
           Discover expert tutors and level up your skills with our curated
           learning experiences.
         </p>
         <button class="btn btn-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-2"
+            class="w-5 h-5 mr-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -35,14 +35,14 @@
   <!-- Listings Section -->
   <div class="mb-8">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-semibold text-base-content">
+      <h2 class="text-base-content text-2xl font-semibold">
         Available Courses
       </h2>
       <div class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-outline btn-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 mr-1"
+            class="w-4 h-4 mr-1"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -68,17 +68,17 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
       {% for listing in listing_list %}
       <div
-        class="card bg-base-100 shadow-md hover:shadow-lg transition-shadow duration-300"
+        class="card bg-base-100 hover:shadow-lg transition-shadow duration-300 shadow-md"
       >
         <div class="card-body">
           <!-- Tutor Badge -->
           <div class="badge badge-primary badge-outline mb-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 mr-1"
+              class="w-4 h-4 mr-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -99,16 +99,16 @@
           </h2>
 
           <!-- Description -->
-          <p class="text-base-content/70 mb-4 line-clamp-3">
+          <p class="text-base-content/70 line-clamp-3 mb-4">
             {{ listing.short_description }}
           </p>
 
           <!-- Date and Actions -->
-          <div class="card-actions justify-between items-center mt-auto">
-            <div class="flex items-center text-sm text-base-content/60">
+          <div class="card-actions items-center justify-between mt-auto">
+            <div class="flex items-center text-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 mr-1"
+                class="w-4 h-4 mr-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -126,7 +126,7 @@
               Learn More
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 ml-1"
+                class="w-4 h-4 ml-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -155,7 +155,7 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
+          class="w-4 h-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -181,7 +181,7 @@
         Next
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
+          class="w-4 h-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
