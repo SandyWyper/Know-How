@@ -22,10 +22,10 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
 
-  <body class="flex flex-col h-full bg-gray-50">
+  <body class="bg-gray-50 flex flex-col h-full">
     <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="border-b border-gray-200">
+      <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
             <a class="brand" href="{{ home_url }}"
@@ -34,12 +34,12 @@
               ></a
             >
           </div>
-          <ul class="menu menu-horizontal bg-base-200">
+          <ul class="menu menu-horizontal">
             <li>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
+                  class="w-5 h-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -57,7 +57,7 @@
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
+                  class="w-5 h-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -75,7 +75,7 @@
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
+                  class="w-5 h-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -94,14 +94,14 @@
       </div>
     </nav>
 
-    <main class="flex-grow bg-gray-50">
+    <main class="0 flex-grow">
       {% block content %}
       <!-- Content Goes here -->
       {% endblock content %}
     </main>
 
     <!-- Footer -->
-    <footer class="mt-auto py-3 bg-gray-500">
+    <footer class="py-3 mt-auto bg-gray-500">
       <p class="m-0 text-center text-white">know-how trademark</p>
     </footer>
   </body>
