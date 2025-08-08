@@ -2,46 +2,201 @@
 
 <!-- index.html content starts here -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid grid-cols-1 gap-6">
-    <!-- Blog Entries Column -->
-    <div class="mt-3">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for listing in listing_list %}
-        <div>
-          <div class="bg-white rounded-lg shadow-md mb-4">
-            <div class="p-6">
-              <div class="image-container">
-                <div class="image-flash">
-                  <p class="text-white m-1 uppercase">
-                    Tutor: {{ listing.tutor }}
-                  </p>
-                </div>
-              </div>
-              <a href="#" class="post-link">
-                <h2 class="text-xl font-semibold mb-2">{{ listing.title }}</h2>
-              </a>
-              <p class="text-gray-700 mb-4">{{ listing.short_description }}</p>
-              <hr />
-              <p class="text-sm text-gray-500">{{ listing.created_on}}</p>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
+  <!-- Page Header -->
+  <div class="hero bg-base-200 rounded-lg mb-8">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-4xl font-bold text-base-content">Know-How Listings</h1>
+        <p class="py-6 text-base-content/70">
+          Discover expert tutors and level up your skills with our curated
+          learning experiences.
+        </p>
+        <button class="btn btn-primary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          Browse All Courses
+        </button>
       </div>
     </div>
   </div>
-  {% if is_paginated %}
-  <nav aria-label="Page navigation">
-    <ul class="flex justify-center space-x-2">
-      {% if page_obj.has_next %}
-      <li>
-        <a href="?page={{ page_obj.next_page_number }}" class="page-link">
-          NEXT &raquo;</a
+
+  <!-- Listings Section -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-semibold text-base-content">
+        Available Courses
+      </h2>
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-outline btn-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 mr-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+            />
+          </svg>
+          Filter
+        </label>
+        <ul
+          tabindex="0"
+          class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
         >
-      </li>
+          <li><a>All Categories</a></li>
+          <li><a>Programming</a></li>
+          <li><a>Design</a></li>
+          <li><a>Business</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for listing in listing_list %}
+      <div
+        class="card bg-base-100 shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
+        <div class="card-body">
+          <!-- Tutor Badge -->
+          <div class="badge badge-primary badge-outline mb-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+            Tutor: {{ listing.tutor }}
+          </div>
+
+          <!-- Card Title -->
+          <h2 class="card-title">
+            <a href="#" class="link link-hover">{{ listing.title }}</a>
+          </h2>
+
+          <!-- Description -->
+          <p class="text-base-content/70 mb-4 line-clamp-3">
+            {{ listing.short_description }}
+          </p>
+
+          <!-- Date and Actions -->
+          <div class="card-actions justify-between items-center mt-auto">
+            <div class="flex items-center text-sm text-base-content/60">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              {{ listing.created_on }}
+            </div>
+            <button class="btn btn-primary btn-sm">
+              Learn More
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 ml-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if is_paginated %}
+  <div class="flex justify-center mt-8">
+    <div class="join">
+      {% if page_obj.has_previous %}
+      <a
+        href="?page={{ page_obj.previous_page_number }}"
+        class="join-item btn btn-outline"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+        Previous
+      </a>
       {% endif %}
-    </ul>
-  </nav>
+
+      <span class="join-item btn btn-active">Page {{ page_obj.number }}</span>
+
+      {% if page_obj.has_next %}
+      <a
+        href="?page={{ page_obj.next_page_number }}"
+        class="join-item btn btn-outline"
+      >
+        Next
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </a>
+      {% endif %}
+    </div>
+  </div>
   {% endif %}
 </div>
 
