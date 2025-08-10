@@ -12,8 +12,8 @@
 @plugin "daisyui/theme" {
   name: "corporate";
   default: true;
-  --color-primary: red;
-  --color-secondary: teal;
+  /* --color-primary: red;
+  --color-secondary: teal; */
 }
 
 /**
