@@ -9,17 +9,14 @@
     <!-- Google Fonts CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 
-    <!-- Font Awesome CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-
     <!-- Tailwind CSS -->
     {% tailwind_css %}
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/index.js' %}"></script>
   </head>
 
   <body class="flex flex-col h-full">
@@ -28,8 +25,8 @@
       <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <a class="brand" href="{{ home_url }}"
-              ><span class="brand"
+            <a class="" href="{{ home_url }}"
+              ><span class=""
                 ><span class="text-red-500">know</span>How</span
               ></a
             >
@@ -102,7 +99,7 @@
 
     <!-- Footer -->
     <footer class="py-3 mt-auto bg-gray-500">
-      <p class="m-0 text-center text-white">know-how trademark</p>
+      <p class="m-0 text-center text-white">**Footer content goes here**</p>
     </footer>
   </body>
 </html>
