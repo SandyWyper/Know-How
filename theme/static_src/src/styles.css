@@ -8,6 +8,7 @@
   logs: true;
 }
 
+/* Daisy UI theme overrides */
 @plugin "daisyui/theme" {
   name: "corporate";
   default: true;
@@ -24,6 +25,7 @@
   */
 @source "../../../**/*.{html,py,js}";
 
+/* Tailwind theme overrides */
 @theme {
   --color-black: #292929;
 }
