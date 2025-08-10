@@ -1,5 +1,19 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: corporate --default, dim --prefersdark;
+  root: ":root";
+  include: ;
+  exclude: ;
+  prefix: ;
+  logs: true;
+}
+
+@plugin "daisyui/theme" {
+  name: "corporate";
+  default: true;
+  --color-primary: red;
+  --color-secondary: teal;
+}
 
 /**
   * A catch-all path to Django template files, JavaScript, and Python files
@@ -9,3 +23,7 @@
   * the scope of this path.
   */
 @source "../../../**/*.{html,py,js}";
+
+@theme {
+  --color-black: #292929;
+}
