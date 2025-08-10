@@ -210,3 +210,4 @@ __marimo__/
 
 listings/fixtures/*
 tailwind.config.js
+staticfiles
