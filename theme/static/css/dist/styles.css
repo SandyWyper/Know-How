@@ -10,7 +10,6 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-500: oklch(55.1% 0.027 264.364);
-    --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-black: #292929;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -20,8 +19,6 @@
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
     --font-weight-semibold: 600;
@@ -857,34 +854,6 @@
     grid-column-start: 1;
     grid-row-start: 1;
   }
-  .container {
-    width: 100%;
-  }
-  @media (width >= 40rem) {
-    .container {
-      max-width: 40rem;
-    }
-  }
-  @media (width >= 48rem) {
-    .container {
-      max-width: 48rem;
-    }
-  }
-  @media (width >= 64rem) {
-    .container {
-      max-width: 64rem;
-    }
-  }
-  @media (width >= 80rem) {
-    .container {
-      max-width: 80rem;
-    }
-  }
-  @media (width >= 96rem) {
-    .container {
-      max-width: 96rem;
-    }
-  }
   .m-0 {
     margin: calc(var(--spacing) * 0);
   }
@@ -1222,19 +1191,12 @@
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
-  .py-12 {
-    padding-block: calc(var(--spacing) * 12);
-  }
   .text-center {
     text-align: center;
   }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
-  }
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
   .text-4xl {
     font-size: var(--text-4xl);
@@ -1262,9 +1224,6 @@
     .text-base-content\/70 {
       color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
     }
-  }
-  .text-gray-600 {
-    color: var(--color-gray-600);
   }
   .text-red-500 {
     color: var(--color-red-500);
