@@ -21,9 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("listings.urls"), name="listings-urls"),
+    path("accounts/", include("allauth.urls")),
     path("pages/", include("site_content.urls"), name="site_content-urls"),
     path('summernote/', include('django_summernote.urls')),
+    path("", include("listings.urls"), name="listings-urls"),
 ]
 
 if settings.DEBUG:
