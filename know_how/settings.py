@@ -49,9 +49,12 @@ INSTALLED_APPS = [
     'django_summernote',
     'tailwind',
     'theme',
+    'crispy_forms',
+    'crispy_tailwind',
     'listings',
     'reviews',
     'site_content',
+    'profiles',
 ]
 
 SITE_ID = 1
@@ -177,3 +180,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"

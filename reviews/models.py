@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Review(models.Model):
     """
@@ -21,10 +22,12 @@ class Review(models.Model):
     )
     # Rating out of 10
     rating = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)],
         help_text="Rating out of 10",
         choices=[(i, str(i)) for i in range(1, 11)]
     )
     # Review content
+    title = models.CharField(max_length=100, help_text="Review title")
     body = models.TextField(
         help_text="The review content"
     )
@@ -33,10 +36,11 @@ class Review(models.Model):
         auto_now_add=True,
         help_text="When this review was created"
     )
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_on']  # Most recent reviews first
-        # Ensure a user can only review a tutor once
-        unique_together = ['target_user', 'author']
+        unique_together = ['target_user', 'author'] # Ensure a user can only review a tutor once
+        
     def __str__(self):
         return f"Review by {self.author.username} for {self.target_user.username} ({self.rating}/10)"
