@@ -41,6 +41,6 @@ class Review(models.Model):
     class Meta:
         ordering = ['-created_on']  # Most recent reviews first
         unique_together = ['target_user', 'author'] # Ensure a user can only review a tutor once
-        
+
     def __str__(self):
         return f"Review by {self.author.username} for {self.target_user.username} ({self.rating}/10)"

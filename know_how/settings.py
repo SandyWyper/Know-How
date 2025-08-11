@@ -52,9 +52,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_tailwind',
     'listings',
+    'profiles.apps.ProfilesConfig',
     'reviews',
     'site_content',
-    'profiles',
 ]
 
 SITE_ID = 1

@@ -14,9 +14,10 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=15, blank=True)
     
     # Profile image
-    profile_image = models.ImageField(
-        default='default_profile.jpg',
+    profile_image = models.FileField(
         upload_to='profile_pics/',
+        blank=True,
+        null=True,
         help_text="Upload a profile picture"
     )
     
@@ -43,7 +44,7 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s Profile"
     
     def get_absolute_url(self):
-        return reverse('profile_detail', kwargs={'username': self.user.username})
+        return reverse('profiles:profile', kwargs={'username': self.user.username})
     
     @property
     def average_rating(self):
@@ -57,24 +58,3 @@ class UserProfile(models.Model):
     def total_reviews(self):
         """Get total number of reviews."""
         return self.user.reviews_received.count()
-    
-    # Signal to auto-create profile when user is created
-    @staticmethod
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
-    
-    @staticmethod
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-
-# Connect signals
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-    else:
-        instance.profile.save()

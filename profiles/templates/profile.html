@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="max-w-4xl px-4 py-8 mx-auto">
+        <!-- Profile Header -->
+        <div class="card bg-base-100 mb-6 shadow-xl">
+            <div class="card-body">
+                <div class="md:flex-row flex flex-col gap-6">
+                    <!-- Profile Image -->
+                    <div class="avatar">
+                        <div class="bg-neutral-focus text-neutral-content w-24 h-24 rounded-full">
+                            {% if profile_user.profile.profile_image %}
+                                <img src="{{ profile_user.profile.profile_image.url }}"
+                                     alt="{{ profile_user.username }}"
+                                     class="rounded-full" />
+                            {% else %}
+                                <span class="text-2xl">{{ profile_user.username|first|upper }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Profile Info -->
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold">{{ profile_user.get_full_name|default:profile_user.username }}</h1>
+                        {% if profile_user.profile.is_tutor %}<div class="badge badge-primary mb-2">Tutor</div>{% endif %}
+                        {% if profile_user.profile.bio %}<p class="text-base-content/70 mb-4">{{ profile_user.profile.bio }}</p>{% endif %}
+                        <div class="flex flex-wrap gap-4 text-sm">
+                            {% if profile_user.profile.location %}
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="w-4 h-4 mr-1"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    {{ profile_user.profile.location }}
+                                </div>
+                            {% endif %}
+                            {% if profile_user.profile.years_experience %}
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="w-4 h-4 mr-1"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    {{ profile_user.profile.years_experience }} years experience
+                                </div>
+                            {% endif %}
+                            {% if total_reviews > 0 %}
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="w-4 h-4 mr-1"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.915a1 1 0 00.95-.69l1.519-4.674z" />
+                                    </svg>
+                                    {% if profile_user.profile.average_rating %}
+                                        {{
+                                        profile_user.profile.average_rating|floatformat:1 }}/10
+                                    {% endif %}
+                                    ({{ total_reviews }} review{{ total_reviews|pluralize }})
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col gap-2">
+                        {% if user == profile_user %}
+                            <a href="{% url 'profiles:profile_edit' username=profile_user.username %}"
+                               class="btn btn-primary btn-sm">Edit Profile</a>
+                        {% endif %}
+                        {% if profile_user.profile.website %}
+                            <a href="{{ profile_user.profile.website }}"
+                               target="_blank"
+                               class="btn btn-outline btn-sm">Visit Website</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Professional Info -->
+        {% if profile_user.profile.expertise_areas or profile_user.profile.education or profile_user.profile.certifications %}
+            <div class="card bg-base-100 mb-6 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Professional Background</h2>
+                    {% if profile_user.profile.expertise_areas %}
+                        <div class="mb-4">
+                            <h3 class="mb-2 font-semibold">Areas of Expertise</h3>
+                            <p>{{ profile_user.profile.expertise_areas }}</p>
+                        </div>
+                    {% endif %}
+                    {% if profile_user.profile.education %}
+                        <div class="mb-4">
+                            <h3 class="mb-2 font-semibold">Education</h3>
+                            <p>{{ profile_user.profile.education }}</p>
+                        </div>
+                    {% endif %}
+                    {% if profile_user.profile.certifications %}
+                        <div class="mb-4">
+                            <h3 class="mb-2 font-semibold">Certifications</h3>
+                            <p>{{ profile_user.profile.certifications }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        <!-- Listings -->
+        {% if listings %}
+            <div class="card bg-base-100 mb-6 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Recent Courses</h2>
+                    <div class="md:grid-cols-2 grid grid-cols-1 gap-4">
+                        {% for listing in listings %}
+                            <div class="card bg-base-200 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h3 class="card-title text-lg">
+                                        <a href="{% url 'listing_detail' listing.slug %}"
+                                           class="link link-hover">{{ listing.title }}</a>
+                                    </h3>
+                                    <p class="text-base-content/70 text-sm">{{ listing.short_description|truncatewords:15 }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <!-- Reviews Section -->
+        <div class="lg:grid-cols-2 grid grid-cols-1 gap-6">
+            <!-- Existing Reviews -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Reviews ({{ total_reviews }})
+                        {% if profile_user.profile.average_rating %}
+                            <div class="badge badge-primary">{{ profile_user.profile.average_rating|floatformat:1 }}/10</div>
+                        {% endif %}
+                    </h2>
+                    {% if reviews %}
+                        <div class="space-y-4">
+                            {% for review in reviews %}
+                                <div class="border-primary pl-4 border-l-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold">{{ review.author.username }}</span>
+                                            <div class="rating rating-sm">
+                                                {% for i in "1234567890" %}
+                                                    {% if forloop.counter <= review.rating %}
+                                                        <span class="text-primary">★</span>
+                                                    {% else %}
+                                                        <span class="text-base-300">★</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <span class="text-base-content/60 text-sm">{{ review.created_on|date:"M j, Y" }}</span>
+                                    </div>
+                                    {% if review.title %}<h4 class="font-semibold">{{ review.title }}</h4>{% endif %}
+                                    <p class="text-sm">{{ review.body }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-base-content/60">No reviews yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Review Form -->
+            {% if can_review %}
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Leave a Review</h2>
+                        <form method="post">
+                            {% csrf_token %} {% crispy review_form %}
+                        </form>
+                    </div>
+                </div>
+            {% elif user_review %}
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Your Review</h2>
+                        <div class="border-secondary pl-4 border-l-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold">You rated: {{ user_review.rating }}/10</span>
+                            </div>
+                            {% if user_review.title %}<h4 class="font-semibold">{{ user_review.title }}</h4>{% endif %}
+                            <p class="text-sm">{{ user_review.body }}</p>
+                            <p class="text-base-content/60 mt-2 text-xs">{{ user_review.created_on|date:"M j, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% elif user.is_authenticated and user != profile_user %}
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Reviews</h2>
+                        <p class="text-base-content/60">You have already reviewed this user.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

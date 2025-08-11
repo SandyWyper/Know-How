@@ -12,7 +12,7 @@ from .forms import UserProfileForm, ReviewForm
 class ProfileDetailView(DetailView):
     """Display a user's profile page with their reviews and review form."""
     model = User
-    template_name = 'profiles/profile_detail.html'
+    template_name = 'profile.html'
     context_object_name = 'profile_user'
     slug_field = 'username'
     slug_url_kwarg = 'username'
@@ -53,16 +53,16 @@ class ProfileDetailView(DetailView):
         # Check if user is authenticated and not reviewing themselves
         if not request.user.is_authenticated:
             messages.error(request, "You must be logged in to leave a review.")
-            return redirect('profiles:profile_detail', username=user.username)
+            return redirect('profiles:profile', username=user.username)
         
         if request.user == user:
             messages.error(request, "You cannot review yourself.")
-            return redirect('profiles:profile_detail', username=user.username)
+            return redirect('profiles:profile', username=user.username)
         
         # Check if user has already reviewed this person
         if Review.objects.filter(author=request.user, target_user=user).exists():
             messages.error(request, "You have already reviewed this user.")
-            return redirect('profiles:profile_detail', username=user.username)
+            return redirect('profiles:profile', username=user.username)
         
         # Process the review form
         form = ReviewForm(request.POST)
@@ -72,7 +72,7 @@ class ProfileDetailView(DetailView):
             review.target_user = user
             review.save()
             messages.success(request, "Your review has been submitted successfully!")
-            return redirect('profiles:profile_detail', username=user.username)
+            return redirect('profiles:profile', username=user.username)
         else:
             # If form is invalid, reload the page with errors
             messages.error(request, "There was an error with your review. Please check the form.")
@@ -82,10 +82,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     """Allow users to edit their own profile."""
     model = UserProfile
     form_class = UserProfileForm
-    template_name = 'profiles/profile_edit.html'
+    template_name = 'profile_edit.html'
     
     def get_object(self):
         return get_object_or_404(UserProfile, user=self.request.user)
     
     def get_success_url(self):
-        return reverse('profiles:profile_detail', kwargs={'username': self.request.user.username})
+        return reverse('profiles:profile', kwargs={'username': self.request.user.username})
