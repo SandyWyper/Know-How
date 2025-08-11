@@ -3,32 +3,24 @@
 <div>
   <div>
     <div>
-      <div>
-        <!-- Post title goes in these h1 tags -->
-        <h1>{{ listing.title }}</h1>
-        <!-- Post author goes before the | the post's created date goes after -->
-        <p>{{ listing.tutor }}</p>
-      </div>
-      <div>
-        <img
-          src="{% static 'images/abundant-activity.png' %}"
-          alt="placeholder"
-        />
-      </div>
+      <!-- Post title goes in these h1 tags -->
+      <h1>{{ listing.title }}</h1>
+      <!-- Post author goes before the | the post's created date goes after -->
+      <p>{{ listing.tutor }}</p>
     </div>
-  </div>
-</div>
-
-<div>
-  <div>
     <div>
-      <div>
-        <!-- The post content goes inside the card-text. -->
-        <!-- Use the | safe filter inside the template tags -->
-        {{ listing.content | safe }}
-      </div>
+      <img
+        src="{% static 'images/abundant-activity.png' %}"
+        alt="placeholder"
+      />
     </div>
   </div>
 
-  {% endblock content %}
+  <div>
+    <!-- The post content goes inside the card-text. -->
+    <!-- Use the | safe filter inside the template tags -->
+    {{ listing.content | safe }}
+  </div>
 </div>
+
+{% endblock content %}
