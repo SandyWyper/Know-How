@@ -17,7 +17,12 @@
                                      width="96"
                                      height="96" />
                             {% else %}
-                                <span class="text-2xl">{{ profile_user.username|first|upper }}</span>
+                                <!-- use default image -->
+                                <img src="{% static 'images/account_profile_default.png' %}"
+                                     alt="{{ profile_user.username }}"
+                                     class="rounded-full"
+                                     width="96"
+                                     height="96" />
                             {% endif %}
                         </div>
                     </div>
