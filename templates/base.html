@@ -22,10 +22,11 @@
     <nav class="border-b border-gray-200">
       <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
         <div class="flex justify-between h-16">
-          <div class="flex items-center">
-            <a class="" href="{{ home_url }}"><span class=""><span class="text-red-500">know</span>How</span></a>
+          <div class="flex items-center text-3xl font-bold">
+            <a href="{{ home_url }}">
+              <span><span class="text-red-500">know</span>How</span></a>
           </div>
-          <ul class="menu menu-horizontal">
+          <ul class="menu menu-horizontal items-center !mb-0">
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link"
@@ -54,11 +55,11 @@
     </nav>
     <!-- Messages -->
     {% if messages %}
-      <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto py-4">
+      <div class="max-w-7xl sm:px-6 lg:px-8 px-4 py-4 mx-auto">
         {% for message in messages %}
           <div class="alert alert-{{ message.tags|default:'info' }} mb-2">
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="stroke-current shrink-0 h-6 w-6"
+                 class="shrink-0 w-6 h-6 stroke-current"
                  fill="none"
                  viewBox="0 0 24 24">
               {% if message.tags == 'success' %}

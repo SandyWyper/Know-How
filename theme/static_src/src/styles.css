@@ -44,7 +44,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
-  color: var(--color-black, #292929);
+  /* color: var(--color-black, #292929); */
   letter-spacing: -0.01em;
 }
 
