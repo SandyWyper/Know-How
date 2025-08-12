@@ -1,35 +1,32 @@
 <!-- prettier-ignore -->
 {% extends "base.html" %}
-
 {% load i18n %}
-
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
-
+{% block head_title %}
+  {% trans "Signup" %}
+{% endblock head_title %}
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
-
-<p>
-  {% blocktrans %}Already have an account? Then please
-  <a href="{{ login_url }}" class="link">sign in</a>.{% endblocktrans %}
-</p>
-
-<form
-  class="prose"
-  id="signup_form"
-  method="post"
-  action="{% url 'account_signup' %}"
->
-  {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
-  <input
-    type="hidden"
-    name="{{ redirect_field_name }}"
-    value="{{ redirect_field_value }}"
-    class="input"
-  />
-  {% endif %}
-  <button type="submit" class="btn btn-primary">
-    {% trans "Sign Up" %} &raquo;
-  </button>
-</form>
-
+  <div class="flex justify-center py-10">
+    <div class="card bg-base-100 w-full max-w-md shadow">
+      <div class="card-body">
+        <h1 class="text-3xl font-bold">{% trans "Sign Up" %}</h1>
+        <p class="text-sm">
+          {% blocktrans %}Already have an account? Then please
+        <a href="{{ login_url }}" class="link link-primary">sign in</a>.{% endblocktrans %}
+        </p>
+        <form id="signup_form"
+              method="post"
+              action="{% url 'account_signup' %}"
+              class="space-y-4">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+            <input type="hidden"
+                   name="{{ redirect_field_name }}"
+                   value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button type="submit" class="btn btn-primary w-full">{% trans "Sign Up" %} »</button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

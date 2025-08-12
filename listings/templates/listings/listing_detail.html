@@ -7,7 +7,7 @@
         <li>
           <a href="{% url 'home' %}">Home</a>
         </li>
-        <li>Listing</li>
+        <li>Listings</li>
         <li class="truncate max-w-[12rem] sm:max-w-[24rem]">{{ listing.title }}</li>
       </ul>
     </div>
@@ -40,7 +40,7 @@
                   <a class="link link-hover"
                      href="{% url 'profiles:profile' username=listing.tutor.username %}">{{ listing.tutor }}</a>
                 </p>
-                <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-base-content/70">
+                <div class="text-base-content/70 flex flex-wrap items-center gap-4 mt-2 text-sm">
                   {% if listing.location %}
                     <span class="inline-flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg"
