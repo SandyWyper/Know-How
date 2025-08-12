@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Review for {{ target_user.get_full_name|default:target_user.username }}{% endblock %}
+{% block content %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="card shadow-md">
+                <div class="card-body">
+                    <h1 class="card-title text-2xl mb-4">Edit Your Review</h1>
+                    <p class="mb-4 text-gray-600">
+                        Editing review for <strong>{{ target_user.get_full_name|default:target_user.username }}</strong>
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% crispy form %}
+                        <div class="mt-4">
+                            <a href="{% url 'profiles:profile' target_user.username %}"
+                               class="btn btn-outline">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

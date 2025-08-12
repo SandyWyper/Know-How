@@ -152,7 +152,7 @@
                     <h2 class="card-title">
                         Reviews ({{ total_reviews }})
                         {% if profile_user.profile.average_rating %}
-                            <div class="badge badge-primary">{{ profile_user.profile.average_rating|floatformat:1 }}/10</div>
+                            <div class="badge badge-primary">{{ profile_user.profile.average_rating|floatformat:1 }} / 10</div>
                         {% endif %}
                     </h2>
                     {% if reviews %}
@@ -205,7 +205,16 @@
                             </div>
                             {% if user_review.title %}<h4 class="font-semibold">{{ user_review.title }}</h4>{% endif %}
                             <p>{{ user_review.body }}</p>
-                            <p class="mt-2 text-xs">{{ user_review.created_on|date:"M j, Y" }}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <p class="text-xs">
+                                    {{ user_review.created_on|date:"M j, Y" }}
+                                    {% if user_review.updated_on != user_review.created_on %}
+                                        (edited {{ user_review.updated_on|date:"M j, Y" }})
+                                    {% endif %}
+                                </p>
+                                <a href="{% url 'reviews:edit' user_review.pk %}"
+                                   class="btn btn-sm btn-outline">Edit Review</a>
+                            </div>
                         </div>
                     </div>
                 </div>

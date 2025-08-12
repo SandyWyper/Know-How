@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
@@ -98,12 +97,16 @@ class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
+        # Determine if this is an edit or create form
+        is_edit = self.instance and self.instance.pk
+        button_text = 'Update Review' if is_edit else 'Submit Review'
+        
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('rating', css_class='select'),
             Field('title', css_class='input'),
             Field('body', css_class='textarea'),
             FormActions(
-                Submit('submit', 'Submit Review', css_class='btn btn-primary')
+                Submit('submit', button_text, css_class='btn btn-primary')
             )
         )
