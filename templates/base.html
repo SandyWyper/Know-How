@@ -1,117 +1,83 @@
-{% load static %} {% url 'home' as home_url %} {% load static tailwind_tags %}
+{% load static %}
+{% url 'home' as home_url %}
+{% load static tailwind_tags %}
 {% url 'account_login' as login_url %} {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
-
 <!DOCTYPE html>
 <html class="h-full" lang="en">
   <head>
     <title>Know How</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <!-- Google Fonts CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-
     <!-- Tailwind CSS -->
     {% tailwind_css %}
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
     <!-- Custom JS -->
     <script src="{% static 'js/index.js' %}"></script>
   </head>
-
   <body class="flex flex-col h-full">
     <!-- Navigation -->
     <nav class="border-b border-gray-200">
       <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <a class="" href="{{ home_url }}"
-              ><span class=""
-                ><span class="text-red-500">know</span>How</span
-              ></a
-            >
+            <a class="" href="{{ home_url }}"><span class=""><span class="text-red-500">know</span>How</span></a>
           </div>
           <ul class="menu menu-horizontal">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a
-                class="nav-link {% if request.path == logout_url %}active{% endif %}"
-                aria-current="page"
-                href="{% url 'account_logout' %}"
-                >Logout</a
-              >
-            </li>
+              <li class="nav-item">
+                <a class="nav-link"
+                   href="{% url 'profiles:profile' username=user.username %}">My Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
+                   aria-current="page"
+                   href="{% url 'account_logout' %}">Logout</a>
+              </li>
             {% else %}
-            <li class="nav-item">
-              <a
-                class="nav-link {% if request.path == signup_url %}active{% endif %}"
-                aria-current="page"
-                href="{% url 'account_signup' %}"
-                >Register</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link {% if request.path == login_url %}active{% endif %}"
-                aria-current="page"
-                href="{% url 'account_login' %}"
-                >Login</a
-              >
-            </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
+                   aria-current="page"
+                   href="{% url 'account_signup' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == login_url %}active{% endif %}"
+                   aria-current="page"
+                   href="{% url 'account_login' %}">Login</a>
+              </li>
             {% endif %}
             <li>
               <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </a>
             </li>
             <li>
               <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </a>
             </li>
             <li>
               <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </a>
             </li>
@@ -119,13 +85,11 @@
         </div>
       </div>
     </nav>
-
     <main class="max-w-7xl sm:px-6 lg:px-8 flex-grow px-4 mx-auto">
       {% block content %}
-      <!-- Content Goes here -->
+        <!-- Content Goes here -->
       {% endblock content %}
     </main>
-
     <!-- Footer -->
     <footer class="py-3 mt-auto bg-gray-500">
       <p class="m-0 text-center text-white">**Footer content goes here**</p>

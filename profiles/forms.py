@@ -18,16 +18,13 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'bio', 'location', 'website', 'phone_number', 
-            'profile_image', 'expertise_areas', 'years_experience', 
-            'education', 'certifications', 'is_tutor', 
-            'show_email_publicly', 'allow_reviews'
+            'bio', 'location', 'profile_image', 'expertise_areas', 
+            'years_experience', 'education_and_certifications'
         ]
         widgets = {
             'bio': forms.Textarea(attrs={'rows': 4}),
             'expertise_areas': forms.Textarea(attrs={'rows': 3}),
-            'education': forms.Textarea(attrs={'rows': 3}),
-            'certifications': forms.Textarea(attrs={'rows': 3}),
+            'education_and_certifications': forms.Textarea(attrs={'rows': 4}),
         }
     
     def __init__(self, *args, **kwargs):
@@ -56,8 +53,6 @@ class UserProfileForm(forms.ModelForm):
             Div(
                 HTML('<h3 class="">Contact & Location</h3>'),
                 'location',
-                'website',
-                'phone_number',
                 'profile_image',
                 css_class='mb-6'
             ),
@@ -65,15 +60,7 @@ class UserProfileForm(forms.ModelForm):
                 HTML('<h3 class="">Professional Information</h3>'),
                 'expertise_areas',
                 'years_experience',
-                'education',
-                'certifications',
-                css_class='mb-6'
-            ),
-            Div(
-                HTML('<h3 class="">Settings</h3>'),
-                'is_tutor',
-                'show_email_publicly',
-                'allow_reviews',
+                'education_and_certifications',
                 css_class='mb-6'
             ),
             FormActions(

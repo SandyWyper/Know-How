@@ -22,7 +22,6 @@
                     <!-- Profile Info -->
                     <div class="flex-1">
                         <h1 class="text-3xl font-bold">{{ profile_user.get_full_name|default:profile_user.username }}</h1>
-                        {% if profile_user.profile.is_tutor %}<div class="badge badge-primary mb-2">Tutor</div>{% endif %}
                         {% if profile_user.profile.bio %}<p class="text-base-content/70 mb-4">{{ profile_user.profile.bio }}</p>{% endif %}
                         <div class="flex flex-wrap gap-4">
                             {% if profile_user.profile.location %}
@@ -71,17 +70,12 @@
                             <a href="{% url 'profiles:profile_edit' username=profile_user.username %}"
                                class="btn btn-primary btn-sm">Edit Profile</a>
                         {% endif %}
-                        {% if profile_user.profile.website %}
-                            <a href="{{ profile_user.profile.website }}"
-                               target="_blank"
-                               class="btn btn-outline btn-sm">Visit Website</a>
-                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         <!-- Professional Info -->
-        {% if profile_user.profile.expertise_areas or profile_user.profile.education or profile_user.profile.certifications %}
+        {% if profile_user.profile.expertise_areas or profile_user.profile.education_and_certifications %}
             <div class="card bg-base-100 mb-6 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">Professional Background</h2>
@@ -91,16 +85,10 @@
                             <p>{{ profile_user.profile.expertise_areas }}</p>
                         </div>
                     {% endif %}
-                    {% if profile_user.profile.education %}
+                    {% if profile_user.profile.education_and_certifications %}
                         <div class="mb-4">
-                            <h3 class="mb-2 font-semibold">Education</h3>
-                            <p>{{ profile_user.profile.education }}</p>
-                        </div>
-                    {% endif %}
-                    {% if profile_user.profile.certifications %}
-                        <div class="mb-4">
-                            <h3 class="mb-2 font-semibold">Certifications</h3>
-                            <p>{{ profile_user.profile.certifications }}</p>
+                            <h3 class="mb-2 font-semibold">Education & Certifications</h3>
+                            <p>{{ profile_user.profile.education_and_certifications }}</p>
                         </div>
                     {% endif %}
                 </div>
