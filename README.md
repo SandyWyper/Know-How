@@ -226,7 +226,6 @@ The application includes automated testing focused on form validation:
   - Field-specific validation (title, content, status)
   - Image upload handling
   - Invalid data handling and error messages
-- **TimeSlotForm**: Testing for scheduling functionality
 - **Edge Cases**: Empty forms, invalid data types, and boundary conditions
 
 ### Code Quality & Performance
