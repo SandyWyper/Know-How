@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from .models import Listing
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from .forms import ListingForm
 from django.http import Http404  # added
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class ListingList(generic.ListView):
@@ -41,3 +43,37 @@ class ListingCreateView(LoginRequiredMixin, generic.CreateView):
 
     def get_success_url(self):
         return reverse("listing_detail", kwargs={"slug": self.object.slug})
+
+
+class ListingUpdateView(LoginRequiredMixin, generic.UpdateView):
+    """Edit an existing listing (owner-only)."""
+    model = Listing
+    form_class = ListingForm
+    template_name = "listings/create_listing.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+
+    def get_queryset(self):
+        # Owner-only editing; staff can edit everything
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            return Listing.objects.all()
+        return Listing.objects.filter(tutor=self.request.user)
+
+    def get_success_url(self):
+        return reverse("listing_detail", kwargs={"slug": self.object.slug})
+
+
+@login_required
+def publish_listing(request, slug):
+    """Publish a listing (owner/staff only)."""
+    listing = get_object_or_404(Listing, slug=slug)
+    if not (request.user == listing.tutor or request.user.is_staff or request.user.is_superuser):
+        raise Http404("Listing not found")
+
+    if request.method == "POST":
+        listing.status = 1
+        listing.save(update_fields=["status", "updated_on"])
+        messages.success(request, "Listing published.")
+        return redirect("listing_detail", slug=listing.slug)
+
+    return redirect("listing_detail", slug=listing.slug)

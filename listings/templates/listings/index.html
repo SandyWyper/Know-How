@@ -3,44 +3,40 @@
   <!-- index.html content starts here -->
   <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
     <!-- Page Header -->
-    <div class="hero bg-base-200 mb-8">
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <h1 class="">Know-How Listings</h1>
-          <p class="py-6">
-            Discover expert tutors and level up your skills with our curated
-            learning experiences.
+    <section class="hero bg-base-200 py-8 my-8 rounded-md">
+      <div class="hero-content lg:flex-row lg:items-center flex-col items-start">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl font-bold leading-tight">Share your skills and teach others</h1>
+          <p class="text-base-content/80 py-4">
+            Know How is a place where people share what they know and learn together. Create a profile and
+            offer your skills as lessons or sessions. Users can leave reviews for each other.
           </p>
-          <button class="btn btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="w-5 h-5 mr-2"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Browse All Courses
-          </button>
+          <div class="flex flex-wrap gap-3">
+            {% if user.is_authenticated %}
+              <a href="{% url 'listing_create' %}" class="btn btn-primary">Offer your skills</a>
+              <a href="{% url 'profiles:profile_edit' username=user.username %}"
+                 class="btn btn-outline">Edit your profile</a>
+            {% else %}
+              <a href="{% url 'account_signup' %}" class="btn btn-primary">Create your profile</a>
+              <a href="#listings" class="btn btn-outline">Browse skills</a>
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
     <!-- Listings Section -->
-    <div class="mb-8">
+    <div id="listings" class="mb-8">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="">Available Courses</h2>
-        <div class="dropdown dropdown-end">
+        <h2 class="text-2xl font-semibold">Available Courses</h2>
+        <!-- TODO: Add filter dropdown -->
+        <!-- <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn btn-outline btn-sm">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="w-4 h-4 mr-1"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             Filter
           </label>
-          <ul tabindex="0"
-              class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
               <a>All Categories</a>
             </li>
@@ -54,16 +50,20 @@
               <a>Business</a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <div class="md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-6">
         {% for listing in listing_list %}
           <div class="card bg-base-100 hover:shadow-lg transition-shadow duration-300 shadow-md">
             <div class="card-body">
+              <!-- Card Title -->
+              <h3 class="card-title mt-0">{{ listing.title }}</h3>
+              <!-- Description -->
+              <p class="line-clamp-3 flex-grow-0">{{ listing.short_description }}</p>
               <!-- Tutor Badge -->
-              <div class="badge badge-primary badge-outline mb-3">
+              <div class="badge badge-secondary badge-outline w-full px-1 py-4">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-4 h-4 mr-1"
+                     class="w-6 h-6"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -71,28 +71,24 @@
                 </svg>
                 Tutor:
                 <a href="{% url 'profiles:profile' username=listing.tutor.username %}"
-                   class="link link-hover">{{ listing.tutor }}</a>
+                   class="link link-hover">
+                  {% if listing.tutor.first_name %}
+                    {{ listing.tutor.first_name }} {{ listing.tutor.last_name }}
+                  {% else %}
+                    {{ listing.tutor }}
+                  {% endif %}
+                </a>
               </div>
-              <!-- Card Title -->
-              <h2 class="card-title">
-                <a href="#" class="link link-hover">{{ listing.title }}</a>
-              </h2>
-              <!-- Description -->
-              <p class=" line-clamp-3 mb-4">{{ listing.short_description }}</p>
               <!-- Date and Actions -->
               <div class="card-actions items-center justify-between mt-auto">
-                <div class="flex items-center text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       class="w-4 h-4 mr-1"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke="currentColor">
+                <!-- <div class="flex items-center text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   {{ listing.created_on }}
-                </div>
+                </div> -->
                 <a href="{% url 'listing_detail' listing.slug %}"
-                   class="btn btn-primary btn-sm">
+                   class="btn btn-primary btn-sm ml-auto">
                   Learn More
                   <svg xmlns="http://www.w3.org/2000/svg"
                        class="w-4 h-4 ml-1"

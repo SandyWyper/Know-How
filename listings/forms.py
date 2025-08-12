@@ -21,6 +21,8 @@ class ListingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
+        submit_text = 'Update Listing' if getattr(self.instance, 'pk', None) else 'Create Listing'
+
         # Crispy forms helper
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -33,7 +35,7 @@ class ListingForm(forms.ModelForm):
                 css_class='mb-6'
             ),
             FormActions(
-                Submit('submit', 'Create Listing', css_class='btn btn-primary')
+                Submit('submit', submit_text, css_class='btn btn-primary')
             )
         )
     

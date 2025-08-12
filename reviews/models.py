@@ -1,8 +1,11 @@
 from django.db import models
+from django.db.models.manager import Manager
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Review(models.Model):
+    # Explicit manager annotation for linters/type checkers
+    objects: Manager = models.Manager()
     """
     Model representing a review left by one user for a tutor.
     """
@@ -43,4 +46,5 @@ class Review(models.Model):
         unique_together = ['target_user', 'author'] # Ensure a user can only review a tutor once
 
     def __str__(self):
-        return f"Review by {self.author.username} for {self.target_user.username} ({self.rating}/10)"
+        # Simple and safe string conversion without attribute assumptions
+        return f"Review by {self.author} for {self.target_user} ({self.rating}/10)"

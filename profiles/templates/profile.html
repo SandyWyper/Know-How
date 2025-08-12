@@ -13,7 +13,9 @@
                             {% if profile_user.profile.profile_image %}
                                 <img src="{{ profile_user.profile.profile_image.url }}"
                                      alt="{{ profile_user.username }}"
-                                     class="rounded-full" />
+                                     class="rounded-full"
+                                     width="96"
+                                     height="96" />
                             {% else %}
                                 <span class="text-2xl">{{ profile_user.username|first|upper }}</span>
                             {% endif %}
@@ -21,7 +23,7 @@
                     </div>
                     <!-- Profile Info -->
                     <div class="flex-1">
-                        <h1 class="">{{ profile_user.get_full_name|default:profile_user.username }}</h1>
+                        <h1>{{ profile_user.get_full_name|default:profile_user.username }}</h1>
                         {% if profile_user.profile.bio %}<p class="mb-4">{{ profile_user.profile.bio }}</p>{% endif %}
                         <div class="flex flex-wrap gap-4">
                             {% if profile_user.profile.location %}
@@ -82,16 +84,38 @@
                     <h2 class="card-title">Professional Background</h2>
                     {% if profile_user.profile.expertise_areas %}
                         <div class="mb-4">
-                            <h3 class="">Areas of Expertise</h3>
+                            <h3>Areas of Expertise</h3>
                             <p>{{ profile_user.profile.expertise_areas }}</p>
                         </div>
                     {% endif %}
                     {% if profile_user.profile.education_and_certifications %}
                         <div class="mb-4">
-                            <h3 class="">Education & Certifications</h3>
+                            <h3>Education & Certifications</h3>
                             <p>{{ profile_user.profile.education_and_certifications }}</p>
                         </div>
                     {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        {% if user.is_authenticated and user == profile_user and draft_listings %}
+            <div class="card mb-6 shadow-md">
+                <div class="card-body">
+                    <h2 class="card-title">Draft Listings</h2>
+                    <div class="md:grid-cols-2 grid grid-cols-1 gap-4">
+                        {% for listing in draft_listings %}
+                            <a href="{% url 'listing_detail' listing.slug %}">
+                                <div class="card bg-base-200 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <h3 class="card-title text-lg">{{ listing.title }}</h3>
+                                        <p>{{ listing.short_description|truncatewords:15 }}</p>
+                                        <div class="mt-2">
+                                            <span class="badge badge-warning">Draft</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endif %}
@@ -106,7 +130,7 @@
                                 <div class="card bg-base-200 shadow-sm">
                                     <div class="card-body p-4">
                                         <h3 class="card-title text-lg">{{ listing.title }}</h3>
-                                        <p class="">{{ listing.short_description|truncatewords:15 }}</p>
+                                        <p>{{ listing.short_description|truncatewords:15 }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -132,7 +156,7 @@
                                 <div class="border-primary pl-4 border-l-4">
                                     <div class="flex items-center justify-between mb-2">
                                         <div class="flex items-center gap-2">
-                                            <span class="">{{ review.author.username }}</span>
+                                            <span>{{ review.author.username }}</span>
                                             <div class="rating rating-xs">
                                                 {% for i in "1234567890" %}
                                                     {% if forloop.counter <= review.rating %}
@@ -146,13 +170,13 @@
                                         </div>
                                     </div>
                                     <span class="text-xs">{{ review.created_on|date:"M j, Y" }}</span>
-                                    {% if review.title %}<h4 class="">{{ review.title }}</h4>{% endif %}
-                                    <p class="">{{ review.body }}</p>
+                                    {% if review.title %}<h4>{{ review.title }}</h4>{% endif %}
+                                    <p>{{ review.body }}</p>
                                 </div>
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="">No reviews yet.</p>
+                        <p>No reviews yet.</p>
                     {% endif %}
                 </div>
             </div>
@@ -172,10 +196,10 @@
                         <h2 class="card-title">Your Review</h2>
                         <div class="border-secondary pl-4 border-l-4">
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="">You rated: {{ user_review.rating }}/10</span>
+                                <span>You rated: {{ user_review.rating }}/10</span>
                             </div>
                             {% if user_review.title %}<h4 class="font-semibold">{{ user_review.title }}</h4>{% endif %}
-                            <p class="">{{ user_review.body }}</p>
+                            <p>{{ user_review.body }}</p>
                             <p class="mt-2 text-xs">{{ user_review.created_on|date:"M j, Y" }}</p>
                         </div>
                     </div>
@@ -184,7 +208,7 @@
                 <div class="card shadow-md">
                     <div class="card-body">
                         <h2 class="card-title">Reviews</h2>
-                        <p class="">You have already reviewed this user.</p>
+                        <p>You have already reviewed this user.</p>
                     </div>
                 </div>
             {% endif %}

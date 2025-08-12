@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -25,8 +25,14 @@ class ProfileDetailView(DetailView):
         context['reviews'] = user.reviews_received.all()
         context['total_reviews'] = user.reviews_received.count()
         
-        # Get user's listings if they're a tutor
+        # Published listings
         context['listings'] = user.listings.filter(status=1)[:5]  # Latest 5 published listings
+
+        # Draft listings (owner-only)
+        if self.request.user.is_authenticated and self.request.user == user:
+            context['draft_listings'] = user.listings.filter(status=0).order_by("-updated_on")
+        else:
+            context['draft_listings'] = []
         
         # Check if current user can leave a review and add review form
         if self.request.user.is_authenticated and self.request.user != user:
@@ -84,7 +90,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserProfileForm
     template_name = 'profile_edit.html'
     
-    def get_object(self):
+    def get_object(self, queryset=None):
         return get_object_or_404(UserProfile, user=self.request.user)
     
     def get_success_url(self):
