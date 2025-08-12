@@ -69,6 +69,7 @@
                         {% if user == profile_user %}
                             <a href="{% url 'profiles:profile_edit' username=profile_user.username %}"
                                class="btn btn-primary btn-sm">Edit Profile</a>
+                            <a href="{% url 'listing_create' %}" class="btn btn-secondary btn-sm">Create Listing</a>
                         {% endif %}
                     </div>
                 </div>

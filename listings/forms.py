@@ -25,7 +25,7 @@ class ListingForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                HTML('<h3 class="mb-4 text-lg font-semibold">Course Information</h3>'),
+                HTML('<h3 class="">Course Information</h3>'),
                 Field('title', css_class='input input-bordered w-full'),
                 Field('short_description', css_class='textarea textarea-bordered w-full'),
                 Field('content', css_class='textarea textarea-bordered w-full'),
