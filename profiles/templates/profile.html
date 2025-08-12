@@ -10,7 +10,7 @@
                     <!-- Profile Image -->
                     <div class="avatar">
                         <div class="bg-neutral-focus w-24 h-24 rounded-full">
-                            {% if profile_user.profile.profile_image %}
+                            {% if 'placeholder' not in profile_user.profile.profile_image.url %}
                                 <img src="{{ profile_user.profile.profile_image.url }}"
                                      alt="{{ profile_user.username }}"
                                      class="rounded-full"

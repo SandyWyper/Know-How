@@ -57,16 +57,16 @@
         {% for listing in listing_list %}
           <div class="card bg-base-100 hover:shadow-lg transition-shadow duration-300 shadow-md">
             <figure class="overflow-hidden">
-              {% if "placeholder" in listing.image.url %}
-                <img src="{% static 'images/abundant-activity.png' %}"
-                     alt="placeholder"
+              {% if "placeholder" not in listing.image.url and listing.image %}
+                <img src="{{ listing.image.url }}"
+                     alt="{{ listing.title }} image"
                      class="sm:h-48 object-cover w-full h-40"
                      width="1200"
                      height="675"
                      loading="lazy" />
               {% else %}
-                <img src="{{ listing.image.url }}"
-                     alt="{{ listing.title }} image"
+                <img src="{% static 'images/abundant-activity.png' %}"
+                     alt="placeholder"
                      class="sm:h-48 object-cover w-full h-40"
                      width="1200"
                      height="675"
