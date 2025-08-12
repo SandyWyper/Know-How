@@ -2015,31 +2015,6 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
-  .text-base-300 {
-    color: var(--color-base-300);
-  }
-  .text-base-content\/60 {
-    color: var(--color-base-content);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-base-content\/60 {
-      color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
-    }
-  }
-  .text-base-content\/70 {
-    color: var(--color-base-content);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-base-content\/70 {
-      color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-    }
-  }
-  .text-neutral-content {
-    color: var(--color-neutral-content);
-  }
-  .text-primary {
-    color: var(--color-primary);
-  }
   .text-red-500 {
     color: var(--color-red-500);
   }
@@ -2151,6 +2126,222 @@
       padding-inline: calc(var(--spacing) * 8);
     }
   }
+}
+html {
+  font-size: 16px;
+  line-height: 1.6;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  color: var(--color-black, #292929);
+  letter-spacing: -0.01em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+  letter-spacing: -0.02em;
+}
+h1,
+.h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+h2,
+.h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+h3,
+.h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+h4,
+.h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+h5,
+.h5 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+h6,
+.h6 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+ul,
+ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+li {
+  margin-bottom: 0.25em;
+}
+blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #6b7280;
+}
+code {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+pre {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+pre code {
+  background: none;
+  padding: 0;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 1.3;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1.1;
+}
+.font-thin {
+  font-weight: 100;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-black {
+  font-weight: 900;
+}
+.italic {
+  font-style: italic;
+}
+.not-italic {
+  font-style: normal;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.normal-case {
+  text-transform: none;
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.leading-snug {
+  line-height: 1.375;
+}
+.leading-normal {
+  line-height: 1.5;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-loose {
+  line-height: 2;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.tracking-normal {
+  letter-spacing: 0;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=corporate]:checked),[data-theme=corporate] {
