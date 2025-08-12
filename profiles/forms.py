@@ -42,25 +42,25 @@ class UserProfileForm(forms.ModelForm):
             Div(
                 HTML('<h3 class="">Personal Information</h3>'),
                 Div(
-                    Field('first_name', wrapper_class='w-1/2 pr-2'),
-                    Field('last_name', wrapper_class='w-1/2 pl-2'),
+                    Field('first_name', wrapper_class='w-1/2 pr-2', css_class='input input-bordered'),
+                    Field('last_name', wrapper_class='w-1/2 pl-2', css_class='input input-bordered'),
                     css_class='flex'
                 ),
-                'email',
-                'bio',
+                Field('email', css_class='input input-bordered'),
+                Field('profile_image', css_class='file-input file-input-bordered'),
+                Field('bio', css_class='textarea textarea-bordered w-full'),
                 css_class='mb-6'
             ),
             Div(
                 HTML('<h3 class="">Contact & Location</h3>'),
-                'location',
-                'profile_image',
+                Field('location', css_class='input input-bordered'),
                 css_class='mb-6'
             ),
             Div(
                 HTML('<h3 class="">Professional Information</h3>'),
-                'expertise_areas',
-                'years_experience',
-                'education_and_certifications',
+                Field('expertise_areas', css_class='textarea textarea-bordered'),
+                Field('years_experience', css_class='input input-bordered'),
+                Field('education_and_certifications', css_class='textarea textarea-bordered'),
                 css_class='mb-6'
             ),
             FormActions(
@@ -100,9 +100,9 @@ class ReviewForm(forms.ModelForm):
         
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            'rating',
-            'title',
-            'body',
+            Field('rating', css_class='select'),
+            Field('title', css_class='input'),
+            Field('body', css_class='textarea'),
             FormActions(
                 Submit('submit', 'Submit Review', css_class='btn btn-primary')
             )

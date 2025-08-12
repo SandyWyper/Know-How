@@ -4,7 +4,7 @@
 {% block content %}
     <div class="max-w-4xl px-4 py-8 mx-auto">
         <!-- Profile Header -->
-        <div class="card bg-base-100 mb-6 shadow-xl">
+        <div class="card mb-6 shadow-md">
             <div class="card-body">
                 <div class="md:flex-row flex flex-col gap-6">
                     <!-- Profile Image -->
@@ -76,7 +76,7 @@
         </div>
         <!-- Professional Info -->
         {% if profile_user.profile.expertise_areas or profile_user.profile.education_and_certifications %}
-            <div class="card bg-base-100 mb-6 shadow-xl">
+            <div class="card mb-6 shadow-md">
                 <div class="card-body">
                     <h2 class="card-title">Professional Background</h2>
                     {% if profile_user.profile.expertise_areas %}
@@ -96,7 +96,7 @@
         {% endif %}
         <!-- Listings -->
         {% if listings %}
-            <div class="card bg-base-100 mb-6 shadow-xl">
+            <div class="card mb-6 shadow-md">
                 <div class="card-body">
                     <h2 class="card-title">Recent Courses</h2>
                     <div class="md:grid-cols-2 grid grid-cols-1 gap-4">
@@ -117,7 +117,7 @@
         <!-- Reviews Section -->
         <div class="lg:grid-cols-2 grid grid-cols-1 gap-6">
             <!-- Existing Reviews -->
-            <div class="card bg-base-100 shadow-xl">
+            <div class="card shadow-md">
                 <div class="card-body">
                     <h2 class="card-title">
                         Reviews ({{ total_reviews }})
@@ -157,7 +157,7 @@
             </div>
             <!-- Review Form -->
             {% if can_review %}
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card shadow-md">
                     <div class="card-body">
                         <h2 class="card-title">Leave a Review</h2>
                         <form method="post">
@@ -166,7 +166,7 @@
                     </div>
                 </div>
             {% elif user_review %}
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card shadow-md">
                     <div class="card-body">
                         <h2 class="card-title">Your Review</h2>
                         <div class="border-secondary pl-4 border-l-4">
@@ -180,7 +180,7 @@
                     </div>
                 </div>
             {% elif user.is_authenticated and user != profile_user %}
-                <div class="card bg-base-100 shadow-xl">
+                <div class="card shadow-md">
                     <div class="card-body">
                         <h2 class="card-title">Reviews</h2>
                         <p class="">You have already reviewed this user.</p>
