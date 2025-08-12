@@ -2610,9 +2610,6 @@
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
   }
-  .text-center {
-    text-align: center;
-  }
   .text-right {
     text-align: right;
   }
