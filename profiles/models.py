@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from PIL import Image
+from cloudinary.models import CloudinaryField
 
 class UserProfile(models.Model):
     """Extended user profile information."""
@@ -12,12 +12,7 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     
     # Profile image
-    profile_image = models.FileField(
-        upload_to='profile_pics/',
-        blank=True,
-        null=True,
-        help_text="Upload a profile picture"
-    )
+    profile_image = CloudinaryField('image', default='placeholder')
     
     # Professional information
     expertise_areas = models.TextField(blank=True, help_text="Areas of expertise (comma-separated)")

@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.manager import Manager
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -20,7 +21,7 @@ class Listing(models.Model):
     # Temporary fields until booking solution is implemented
     location = models.CharField(max_length=200, blank=True)
     session_time = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(upload_to="listing_images/", blank=True, null=True)
+    image = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
