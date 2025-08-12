@@ -16,7 +16,7 @@
         <div class="lg:flex-row flex flex-col gap-6">
           <div class="lg:w-1/2 w-full">
             <figure class="rounded-box overflow-hidden">
-              {% if listing.image %}
+              {% if "placeholder" not in listing.image.url and listing.image %}
                 <img src="{{ listing.image.url }}"
                      alt="{{ listing.title }} image"
                      class="object-cover w-full h-auto"
