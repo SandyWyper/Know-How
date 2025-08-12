@@ -24,7 +24,7 @@
                         <h1 class="text-3xl font-bold">{{ profile_user.get_full_name|default:profile_user.username }}</h1>
                         {% if profile_user.profile.is_tutor %}<div class="badge badge-primary mb-2">Tutor</div>{% endif %}
                         {% if profile_user.profile.bio %}<p class="text-base-content/70 mb-4">{{ profile_user.profile.bio }}</p>{% endif %}
-                        <div class="flex flex-wrap gap-4 text-sm">
+                        <div class="flex flex-wrap gap-4">
                             {% if profile_user.profile.location %}
                                 <div class="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -59,10 +59,7 @@
                                          stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.915a1 1 0 00.95-.69l1.519-4.674z" />
                                     </svg>
-                                    {% if profile_user.profile.average_rating %}
-                                        {{
-                                        profile_user.profile.average_rating|floatformat:1 }}/10
-                                    {% endif %}
+                                    {% if profile_user.profile.average_rating %}{{ profile_user.profile.average_rating|floatformat:1 }}/10{% endif %}
                                     ({{ total_reviews }} review{{ total_reviews|pluralize }})
                                 </div>
                             {% endif %}
@@ -122,7 +119,7 @@
                                         <a href="{% url 'listing_detail' listing.slug %}"
                                            class="link link-hover">{{ listing.title }}</a>
                                     </h3>
-                                    <p class="text-base-content/70 text-sm">{{ listing.short_description|truncatewords:15 }}</p>
+                                    <p class="text-base-content/70">{{ listing.short_description|truncatewords:15 }}</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -158,10 +155,10 @@
                                                 {% endfor %}
                                             </div>
                                         </div>
-                                        <span class="text-base-content/60 text-sm">{{ review.created_on|date:"M j, Y" }}</span>
+                                        <span class="text-base-content/60">{{ review.created_on|date:"M j, Y" }}</span>
                                     </div>
                                     {% if review.title %}<h4 class="font-semibold">{{ review.title }}</h4>{% endif %}
-                                    <p class="text-sm">{{ review.body }}</p>
+                                    <p class="">{{ review.body }}</p>
                                 </div>
                             {% endfor %}
                         </div>
@@ -189,7 +186,7 @@
                                 <span class="font-semibold">You rated: {{ user_review.rating }}/10</span>
                             </div>
                             {% if user_review.title %}<h4 class="font-semibold">{{ user_review.title }}</h4>{% endif %}
-                            <p class="text-sm">{{ user_review.body }}</p>
+                            <p class="">{{ user_review.body }}</p>
                             <p class="text-base-content/60 mt-2 text-xs">{{ user_review.created_on|date:"M j, Y" }}</p>
                         </div>
                     </div>
