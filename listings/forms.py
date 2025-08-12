@@ -21,6 +21,9 @@ class ListingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
+        # Make image field optional (remove required asterisk)
+        self.fields['image'].required = False
+        
         submit_text = 'Update Listing' if getattr(self.instance, 'pk', None) else 'Create Listing'
 
         # Crispy forms helper

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from .models import Listing
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import ListingForm
 from django.http import Http404  # added
 from django.contrib import messages
@@ -66,6 +66,25 @@ class ListingUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse("listing_detail", kwargs={"slug": self.object.slug})
+
+
+class ListingDeleteView(LoginRequiredMixin, generic.DeleteView):
+    """Delete an existing listing (owner-only)."""
+    model = Listing
+    template_name = "listings/listing_confirm_delete.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    success_url = reverse_lazy("home")
+
+    def get_queryset(self):
+        # Owner-only deletion; staff can delete everything
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            return Listing.objects.all()
+        return Listing.objects.filter(tutor=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Listing deleted successfully!")
+        return super().delete(request, *args, **kwargs)
 
 
 @login_required

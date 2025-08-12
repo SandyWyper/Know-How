@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="max-w-3xl px-4 py-8 mx-auto">
+    <div class="max-w-5xl px-4 py-8 mx-auto">
         <div class="card shadow-lg">
             <div class="card-body">
-                <h1 class="card-title mb-6 text-2xl">Create New Listing</h1>
+                <h1 class="card-title mb-6 text-2xl">
+                    {% if form.instance.pk %}
+                        Edit Listing
+                    {% else %}
+                        Create New Listing
+                    {% endif %}
+                </h1>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% crispy form %}
                 </form>
-                <div class="mt-6">
-                    <a href="{% url 'profiles:profile' username=user.username %}"
+                <div class="flex gap-3 mt-6">
+                    <a href="{% if form.instance.pk %}{% url 'listing_detail' slug=form.instance.slug %}{% else %}{% url 'profiles:profile' username=user.username %}{% endif %}"
                        class="btn btn-ghost">Cancel</a>
+                    {% if form.instance.pk %}
+                        <a href="{% url 'listing_delete' slug=form.instance.slug %}"
+                           class="btn btn-error btn-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="w-4 h-4 mr-1"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Delete Listing
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
