@@ -39,6 +39,7 @@ class ListingCreateView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         form.instance.tutor = self.request.user
+        messages.success(self.request, "Listing created successfully!")
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -58,6 +59,10 @@ class ListingUpdateView(LoginRequiredMixin, generic.UpdateView):
         if self.request.user.is_staff or self.request.user.is_superuser:
             return Listing.objects.all()
         return Listing.objects.filter(tutor=self.request.user)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Listing updated successfully!")
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse("listing_detail", kwargs={"slug": self.object.slug})
