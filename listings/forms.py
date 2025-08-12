@@ -12,7 +12,7 @@ class ListingForm(forms.ModelForm):
     
     class Meta:
         model = Listing
-        fields = ['title', 'short_description', 'content', 'status']
+        fields = ['title', 'short_description', 'content', 'image', 'status']
         widgets = {
             'short_description': forms.Textarea(attrs={'rows': 3}),
             'content': forms.Textarea(attrs={'rows': 6}),
@@ -31,6 +31,8 @@ class ListingForm(forms.ModelForm):
                 Field('title', css_class='input input-bordered w-full'),
                 Field('short_description', css_class='textarea textarea-bordered w-full'),
                 Field('content', css_class='textarea textarea-bordered w-full'),
+                HTML('<h3 class="mt-6">Image</h3>'),
+                Field('image', css_class='file-input file-input-bordered w-full'),
                 Field('status', css_class='select select-bordered w-full'),
                 css_class='mb-6'
             ),

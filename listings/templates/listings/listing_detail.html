@@ -1,47 +1,81 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  {% load static %}
-  <div class="max-w-3xl px-4 py-8 mx-auto">
-    <div class="flex items-start justify-between mb-4">
-      <div>
-        <h1 class="text-2xl font-semibold">{{ listing.title }}</h1>
-        <p class="text-base-content/70 text-sm">By {{ listing.tutor }}</p>
-      </div>
-      <div class="flex items-center gap-2">
-        {% if listing.status == 0 %}
-          <span class="badge badge-warning">Draft</span>
-        {% else %}
-          <span class="badge badge-success">Published</span>
-        {% endif %}
-      </div>
+  <div class="max-w-5xl px-4 py-8 mx-auto">
+    <div class="breadcrumbs mb-4 text-sm">
+      <ul>
+        <li>
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li>Listing</li>
+        <li class="truncate max-w-[12rem] sm:max-w-[24rem]">{{ listing.title }}</li>
+      </ul>
     </div>
-    {% if user.is_authenticated and user == listing.tutor %}
-      <div class="flex gap-2 mb-6">
-        <a href="{% url 'listing_edit' slug=listing.slug %}"
-           class="btn btn-outline btn-sm">Edit Listing</a>
-        <form method="post" action="{% url 'listing_publish' slug=listing.slug %}">
-          {% csrf_token %}
-          <button type="submit"
-                  class="btn btn-primary btn-sm"
-                  {% if listing.status == 1 %}disabled{% endif %}>
-            {% if listing.status == 1 %}
-              Published
-            {% else %}
-              Publish
+    <div class="card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="lg:flex-row flex flex-col gap-6">
+          <div class="lg:w-1/2 w-full">
+            <figure class="rounded-box overflow-hidden">
+              {% if listing.image %}
+                <img src="{{ listing.image.url }}"
+                     alt="{{ listing.title }} image"
+                     class="object-cover w-full h-auto"
+                     width="1200"
+                     height="675" />
+              {% else %}
+                <img src="{% static 'images/abundant-activity.png' %}"
+                     alt="placeholder"
+                     class="object-cover w-full h-auto"
+                     width="1200"
+                     height="675" />
+              {% endif %}
+            </figure>
+          </div>
+          <div class="lg:w-1/2 w-full">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h1 class="text-3xl font-bold leading-tight">{{ listing.title }}</h1>
+                <p class="text-base-content/70 text-sm">
+                  By
+                  <a class="link link-hover"
+                     href="{% url 'profiles:profile' username=listing.tutor.username %}">{{ listing.tutor }}</a>
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                {% if listing.status == 0 %}
+                  <span class="badge badge-warning">Draft</span>
+                {% else %}
+                  <span class="badge badge-success">Published</span>
+                {% endif %}
+              </div>
+            </div>
+            {% if user.is_authenticated and user == listing.tutor %}
+              <div class="flex flex-wrap gap-2 mt-4">
+                <a href="{% url 'listing_edit' slug=listing.slug %}"
+                   class="btn btn-outline btn-sm">Edit Listing</a>
+                <form method="post" action="{% url 'listing_publish' slug=listing.slug %}">
+                  {% csrf_token %}
+                  <button type="submit"
+                          class="btn btn-primary btn-sm"
+                          {% if listing.status == 1 %}disabled{% endif %}>
+                    {% if listing.status == 1 %}
+                      Published
+                    {% else %}
+                      Publish
+                    {% endif %}
+                  </button>
+                </form>
+                {% if listing.status == 0 %}
+                  <span class="text-base-content/60 self-center text-xs">Draft is only visible to you.</span>
+                {% endif %}
+              </div>
             {% endif %}
-          </button>
-        </form>
-        {% if listing.status == 0 %}
-          <span class="text-base-content/60 self-center text-xs">Draft is only visible to you.</span>
-        {% endif %}
+            <div class="divider my-4"></div>
+            <p class="text-base-content/80">{{ listing.short_description }}</p>
+            <div class="max-w-none mt-4 prose">{{ listing.content | safe }}</div>
+          </div>
+        </div>
       </div>
-    {% endif %}
-    <div class="mb-6">
-      <img src="{% static 'images/abundant-activity.png' %}"
-           alt="placeholder"
-           width="1200"
-           height="600" />
     </div>
-    <div class="prose">{{ listing.content | safe }}</div>
   </div>
 {% endblock content %}

@@ -5,7 +5,7 @@
         <div class="card shadow-lg">
             <div class="card-body">
                 <h1 class="card-title text-2xl mb-6">Create New Listing</h1>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% crispy form %}
                 </form>

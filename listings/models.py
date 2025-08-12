@@ -17,6 +17,7 @@ class Listing(models.Model):
         User, on_delete=models.CASCADE, related_name="listings"
     )
     content = models.TextField()
+    image = models.ImageField(upload_to="listing_images/", blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
