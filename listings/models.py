@@ -17,6 +17,9 @@ class Listing(models.Model):
         User, on_delete=models.CASCADE, related_name="listings"
     )
     content = models.TextField()
+    # Temporary fields until booking solution is implemented
+    location = models.CharField(max_length=200, blank=True)
+    session_time = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to="listing_images/", blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

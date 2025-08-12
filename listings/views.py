@@ -13,7 +13,7 @@ class ListingList(generic.ListView):
     """Displays a list of published listings."""
     queryset = Listing.objects.filter(status=1).order_by("-created_on")
     template_name = "listings/index.html"
-    paginate_by = 6
+    paginate_by = 9
     # context_object_name = "object_list"
 
 

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <!-- index.html content starts here -->
-  <div class="max-w-7xl sm:px-6 lg:px-8 px-4 mx-auto">
+  <div class="max-w-7xl sm:px-6 lg:px-8 px-4 pb-16 mx-auto">
     <!-- Page Header -->
     <section class="hero bg-base-200 py-8 my-8 rounded-md">
       <div class="hero-content lg:flex-row lg:items-center flex-col items-start">
@@ -78,24 +78,34 @@
               <h3 class="card-title mt-0">{{ listing.title }}</h3>
               <!-- Description -->
               <p class="line-clamp-3 flex-grow-0">{{ listing.short_description }}</p>
-              <!-- Tutor Badge -->
-              <div class="badge badge-secondary badge-outline w-full px-1 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-6 h-6"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Tutor:
-                <a href="{% url 'profiles:profile' username=listing.tutor.username %}"
-                   class="link link-hover">
-                  {% if listing.tutor.first_name %}
-                    {{ listing.tutor.first_name }} {{ listing.tutor.last_name }}
-                  {% else %}
-                    {{ listing.tutor }}
-                  {% endif %}
-                </a>
+              <!-- Location and Time -->
+              <div class="text-base-content/70 flex flex-wrap items-center gap-4 text-sm">
+                {% if listing.location %}
+                  <span class="inline-flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-4 h-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 9c0 7.5-7.5 12-7.5 12S4.5 16.5 4.5 9a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    {{ listing.location }}
+                  </span>
+                {% endif %}
+                {% if listing.session_time %}
+                  <span class="inline-flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-4 h-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
+                    </svg>
+                    {{ listing.session_time }}
+                  </span>
+                {% endif %}
               </div>
               <!-- Date and Actions -->
               <div class="card-actions items-center justify-between mt-auto">
@@ -105,6 +115,25 @@
                   </svg>
                   {{ listing.created_on }}
                 </div> -->
+                <!-- Tutor Badge -->
+                <div class="badge badge-secondary badge-dash px-2 py-4">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Tutor:
+                  <a href="{% url 'profiles:profile' username=listing.tutor.username %}"
+                     class="link link-hover">
+                    {% if listing.tutor.first_name %}
+                      {{ listing.tutor.first_name }} {{ listing.tutor.last_name }}
+                    {% else %}
+                      {{ listing.tutor }}
+                    {% endif %}
+                  </a>
+                </div>
                 <a href="{% url 'listing_detail' listing.slug %}"
                    class="btn btn-primary btn-sm ml-auto">
                   Learn More

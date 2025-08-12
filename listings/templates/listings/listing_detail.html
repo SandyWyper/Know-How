@@ -40,6 +40,34 @@
                   <a class="link link-hover"
                      href="{% url 'profiles:profile' username=listing.tutor.username %}">{{ listing.tutor }}</a>
                 </p>
+                <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-base-content/70">
+                  {% if listing.location %}
+                    <span class="inline-flex items-center gap-1">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           class="w-4 h-4"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 9c0 7.5-7.5 12-7.5 12S4.5 16.5 4.5 9a7.5 7.5 0 1115 0z" />
+                      </svg>
+                      {{ listing.location }}
+                    </span>
+                  {% endif %}
+                  {% if listing.session_time %}
+                    <span class="inline-flex items-center gap-1">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           class="w-4 h-4"
+                           viewBox="0 0 24 24"
+                           fill="none"
+                           stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
+                      </svg>
+                      {{ listing.session_time }}
+                    </span>
+                  {% endif %}
+                </div>
               </div>
               <div class="flex items-center gap-2">
                 {% if listing.status == 0 %}
