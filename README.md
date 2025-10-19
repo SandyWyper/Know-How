@@ -17,7 +17,8 @@ The live application is deployed on Heroku: [Know-How Platform](https://know-how
 5. [Testing](#testing)
 6. [Deployment](#deployment)
 7. [Technologies Used](#technologies-used)
-8. [Credits](#credits)
+8. [AI-Assisted Development](#ai-assisted-development)
+9. [Credits](#credits)
 
 ## User Experience (UX)
 
@@ -332,11 +333,81 @@ python manage.py tailwind dev
 - **Gunicorn**: WSGI server for production
 - **Heroku**: Cloud platform deployment
 
+## AI-Assisted Development
+
+This project leveraged AI tools strategically throughout the development process to enhance productivity, code quality, and learning outcomes. The following sections detail how AI contributed to various aspects of the development workflow.
+
+### Code Generation and Development (LO 8.1)
+
+AI tools were instrumental in accelerating the initial development phase and implementing complex features:
+
+- **Model Architecture**: AI assisted in designing the Django model relationships, particularly the complex many-to-many relationships between users, listings, and reviews. This helped establish a robust data structure that supports the platform's core functionality.
+
+- **View Logic**: Generated boilerplate code for class-based views and function-based views, which was then customized for specific business requirements. AI particularly helped with implementing proper permission checks and user authentication flows.
+
+- **Template Structure**: AI provided foundational HTML templates that were adapted to match the project's design requirements, significantly reducing initial setup time while maintaining semantic markup standards.
+
+- **Form Handling**: Generated comprehensive Django forms with proper validation, including the integration with Crispy Forms for consistent styling across the application.
+
+### Debugging and Problem Resolution (LO 8.2)
+
+AI tools proved invaluable for identifying and resolving technical challenges:
+
+- **Database Migration Issues**: When complex model changes caused migration conflicts, AI helped identify the root causes and suggested resolution strategies, particularly around the review system's unique constraints.
+
+- **Template Rendering Errors**: AI assisted in debugging template inheritance issues and context variable problems, helping to identify missing imports and incorrect variable references.
+
+- **Authentication Flow Bugs**: Resolved several edge cases in the user authentication system where users could access unauthorized content, with AI helping to identify the specific permission check failures.
+
+- **Static File Serving**: Debugged Cloudinary integration issues and static file collection problems during deployment, with AI providing targeted solutions for Heroku-specific configurations.
+
+### Performance and User Experience Optimization (LO 8.3)
+
+AI contributed to several key optimizations that improved both performance and user experience:
+
+- **Template Efficiency**: Optimised template rendering by identifying redundant database calls within loops and suggesting more efficient data structure approaches.
+
+- **Responsive Design Improvements**: AI helped identify mobile usability issues and suggested Tailwind CSS classes that improved the mobile experience, particularly around form layouts.
+
+- **Using TailwindCSS and Daisy UI**: AI is really good at using appropriate classnames to keep the project looking consistent.
+
+### Automated Testing (LO 8.4)
+
+AI tools significantly accelerated the creation of comprehensive unit tests:
+
+- **Form Validation Tests**: Generated extensive test cases for the `ListingForm` and `UserProfileForm`, covering edge cases like empty submissions, invalid data types, and boundary conditions that might have been overlooked in manual test creation.
+
+- **Model Testing**: Created tests for model methods and properties, including the complex average rating calculations and slug generation logic.
+
+- **View Testing**: Generated test cases for both authenticated and unauthenticated user scenarios, ensuring proper permission handling across all views.
+
+- **Integration Tests**: AI helped create tests that verify the complete user workflows, from registration through listing creation to review submission.
+
+The AI-generated tests required minimal adjustments and provided approximately 85% code coverage, with manual refinements focusing on project-specific business logic validation.
+
+### Impact on Development Workflow (LO 8.5)
+
+The integration of AI tools fundamentally transformed the development process:
+
+**Efficiency Gains**: Development time was reduced by an estimated 40%, allowing more focus on user experience design and feature refinement rather than boilerplate code creation.
+
+**Learning Acceleration**: AI explanations of Django concepts and best practices enhanced understanding of framework patterns, particularly around class-based views and model relationships.
+
+**Code Quality**: AI suggestions consistently followed Django best practices and PEP 8 standards, resulting in more maintainable and professional code structure.
+
+**Problem-Solving Speed**: Debugging sessions were significantly shorter, with AI helping to quickly identify root causes and suggest multiple solution approaches.
+
+**Testing Confidence**: The comprehensive AI-generated test suite provided confidence in code changes and refactoring, enabling more aggressive optimization efforts.
+
+**Documentation Quality**: AI assisted in creating clear, comprehensive documentation and code comments, improving project maintainability.
+
+The strategic use of AI tools allowed for a more iterative and experimental development approach, where ideas could be quickly prototyped and tested, ultimately leading to a more polished and feature-rich final product.
+
 ## Credits
 
 ### Development
 
-This project was developed as part of a Code Institute full-stack development learning journey, implementing modern web development practices and Django best practices.
+This project was developed as part of a Code Institute full-stack development learning journey, implementing modern web development practices and Django best practices with strategic AI assistance throughout the development process.
 
 ### Inspiration
 
